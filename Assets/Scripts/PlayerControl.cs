@@ -17,7 +17,7 @@ public class PlayerControl : NetworkBehaviour
     private float walkSpeed = 3.5f;
     
     [SerializeField]
-    private float rotationSpeed = 1.5f;
+    private float rotationSpeed = 0.8f;
     
     [SerializeField]
     private Vector2 defaultInitialPlanePosition = new Vector2(-4, 4);

@@ -88,12 +88,12 @@ public class UIManager : Singleton<UIManager>
         {
             Logger.Instance.LogInfo($"{id} just connected...");
         };
-
+*/
         NetworkManager.Singleton.OnServerStarted += () =>
         {
             hasServerStarted = true;
         };
-*/
+
         executePhysicsButton.onClick.AddListener(() => 
         {
             if (!hasServerStarted)
