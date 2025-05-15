@@ -17,14 +17,14 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField]
     private TextMeshProUGUI playersInGameText;
+    
+    [SerializeField]
+    private Button executePhysicsButton;
+    
+    private bool hasServerStarted;
 /*
     [SerializeField]
     private TMP_InputField joinCodeInput;
-
-    [SerializeField]
-    private Button executePhysicsButton;
-
-    private bool hasServerStarted;
 */
     private void Awake()
     {
@@ -93,7 +93,7 @@ public class UIManager : Singleton<UIManager>
         {
             hasServerStarted = true;
         };
-
+*/
         executePhysicsButton.onClick.AddListener(() => 
         {
             if (!hasServerStarted)
@@ -102,6 +102,6 @@ public class UIManager : Singleton<UIManager>
                 return;
             }
             SpawnerControl.Instance.SpawnObjects();
-        });*/
+        });
     }
 }
