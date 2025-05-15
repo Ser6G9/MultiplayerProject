@@ -684,11 +684,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: f5d23812-b906-4e9d-9ccd-9b240bab9b54
+  cloudProjectId: 8e59abb8-2017-4706-98cd-a4230d99cb0c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: UnityMultiplayerPlayground
-  organizationId: dilmer
+  projectName: UnityMultiplayerPlayground (1)
+  organizationId: sergio-garcias
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0
