@@ -45,10 +45,18 @@ public class PlayerBallControl : NetworkBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         if (vertical > 0 || vertical < 0)
+        {
             ballRigidBody.AddForce(vertical > 0 ? Vector3.forward * speed : Vector3.back * speed);
+        }
+
         if (horizontal > 0 || horizontal < 0)
+        {
             ballRigidBody.AddForce(horizontal > 0 ? Vector3.right * speed : Vector3.left * speed);
+        }
+
         if (Input.GetKey(KeyCode.Space))
+        {
             ballRigidBody.AddForce(Vector3.up * flySpeed);
+        }
     }
 }

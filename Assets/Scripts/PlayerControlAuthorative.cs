@@ -13,7 +13,7 @@ public class PlayerControlAuthorative : NetworkBehaviour
     private float runSpeedOffset = 2.0f;
 
     [SerializeField]
-    private float rotationSpeed = 3.5f;
+    private float rotationSpeed = 0.8f;
 
     [SerializeField]
     private Vector2 defaultInitialPositionOnPlane = new Vector2(-4, 4);
@@ -66,28 +66,34 @@ public class PlayerControlAuthorative : NetworkBehaviour
 
     private void ClientInput()
     {
-        // y axis client rotation
+        // Rotación
         Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
 
-        // forward & backward direction
+        // Alante y atras
         Vector3 direction = transform.TransformDirection(Vector3.forward);
         float forwardInput = Input.GetAxis("Vertical");
         Vector3 inputPosition = direction * forwardInput;
 
-        // change animation states
+        // Estados de la animación:
         if (forwardInput == 0)
+        {
             UpdatePlayerStateServerRpc(PlayerState.Idle);
+        }
         else if (!ActiveRunningActionKey() && forwardInput > 0 && forwardInput <= 1)
+        {
             UpdatePlayerStateServerRpc(PlayerState.Walk);
+        }
         else if (ActiveRunningActionKey() && forwardInput > 0 && forwardInput <= 1)
         {
             inputPosition = direction * runSpeedOffset;
             UpdatePlayerStateServerRpc(PlayerState.Run);
         }
         else if (forwardInput < 0)
+        {
             UpdatePlayerStateServerRpc(PlayerState.ReverseWalk);
+        }
 
-        // client is responsible for moving itself
+        
         characterController.SimpleMove(inputPosition * walkSpeed);
         transform.Rotate(inputRotation * rotationSpeed, Space.World);
     }

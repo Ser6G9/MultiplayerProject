@@ -10,11 +10,15 @@ public class PlayerControl : NetworkBehaviour
     {
         Idle,
         Walk,
+        Run,
         ReverseWalk
     }
     
     [SerializeField]
     private float walkSpeed = 3.5f;
+    
+    [SerializeField]
+    private float runSpeedOffset = 4.0f;
     
     [SerializeField]
     private float rotationSpeed = 0.8f;
@@ -71,7 +75,7 @@ public class PlayerControl : NetworkBehaviour
         // Rotación
         Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
 
-        // Alante y atrás
+        // Alante y atras
         Vector3 direction = transform.TransformDirection(Vector3.forward);
         float forwardInput = Input.GetAxis("Vertical");
         Vector3 inputPosition = direction * forwardInput;
@@ -85,19 +89,7 @@ public class PlayerControl : NetworkBehaviour
         }
         
         // Estados de la animación:
-        if (forwardInput > 0)
-        {
-            UpdatePlayerStateServerRpc(PlayerState.Walk);
-        }
-        else if (forwardInput < 0)
-        {
-            UpdatePlayerStateServerRpc(PlayerState.ReverseWalk);
-        }
-        else
-        {
-            UpdatePlayerStateServerRpc(PlayerState.Idle);
-        }
-        /*if (forwardInput == 0)
+        if (forwardInput == 0)
         {
             UpdatePlayerStateServerRpc(PlayerState.Idle);
         }
@@ -111,7 +103,7 @@ public class PlayerControl : NetworkBehaviour
             UpdatePlayerStateServerRpc(PlayerState.Run);
         }
         else if (forwardInput < 0)
-            UpdatePlayerStateServerRpc(PlayerState.ReverseWalk);*/
+            UpdatePlayerStateServerRpc(PlayerState.ReverseWalk);
 
     }
     
@@ -127,25 +119,18 @@ public class PlayerControl : NetworkBehaviour
         }
     }
     
+    private static bool ActiveRunningActionKey()
+    {
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
+    
     private void ClientVisuals()
     {
-        if (networkPlayerState.Value == PlayerState.Walk)
-        {
-            animator.SetFloat("Walk", 1);
-        } 
-        else if (networkPlayerState.Value == PlayerState.ReverseWalk)
-        {
-            animator.SetFloat("Walk", -1);
-        }
-        else
-        {
-            animator.SetFloat("Walk", 0);
-        }
-        /*if (oldPlayerState != networkPlayerState.Value)
+        if (oldPlayerState != networkPlayerState.Value)
         {
             oldPlayerState = networkPlayerState.Value;
             animator.SetTrigger($"{networkPlayerState.Value}");
-        }*/
+        }
     }
     
     private void UpdateClient()
@@ -165,37 +150,4 @@ public class PlayerControl : NetworkBehaviour
     {
         networkPlayerState.Value = state;
     }
-
-    /*[SerializeField]
-    private float runSpeedOffset = 2.0f;
-
-
-
-    
-
-
-    
-
-    // client caches positions
-    
-
-    
-
-    
-
-
-    
-
-    
-
-    
-
-    private static bool ActiveRunningActionKey()
-    {
-        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-    }
-
-    
-
-    */
 }
