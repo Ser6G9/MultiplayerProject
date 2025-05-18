@@ -13,7 +13,7 @@ public class PlayerWithRaycastControl : NetworkBehaviour
     private float runSpeedOffset = 2.0f;
 
     [SerializeField]
-    private float rotationSpeed = 3.5f;
+    private float rotationSpeed = 0.8f;
 
     [SerializeField]
     private Vector2 defaultInitialPositionOnPlane = new Vector2(-4, 4);
@@ -36,10 +36,8 @@ public class PlayerWithRaycastControl : NetworkBehaviour
 
     [SerializeField]
     private GameObject leftHand;
-
     [SerializeField]
     private GameObject rightHand;
-
     [SerializeField]
     private float minPunchDistance = 1.0f;
 
@@ -200,15 +198,14 @@ public class PlayerWithRaycastControl : NetworkBehaviour
     [ServerRpc]
     public void UpdateHealthServerRpc(int takeAwayPoint, ulong clientId)
     {
-        var clientWithDamaged = NetworkManager.Singleton.ConnectedClients[clientId]
-            .PlayerObject.GetComponent<PlayerWithRaycastControl>();
+        var clientWithDamaged = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<PlayerWithRaycastControl>();
 
         if (clientWithDamaged != null && clientWithDamaged.networkPlayerHealth.Value > 0)
         {
             clientWithDamaged.networkPlayerHealth.Value -= takeAwayPoint;
         }
 
-        // execute method on a client getting punch
+        // Indicador de pupa
         NotifyHealthChangedClientRpc(takeAwayPoint, new ClientRpcParams
         {
             Send = new ClientRpcSendParams
@@ -221,9 +218,12 @@ public class PlayerWithRaycastControl : NetworkBehaviour
     [ClientRpc]
     public void NotifyHealthChangedClientRpc(int takeAwayPoint, ClientRpcParams clientRpcParams = default)
     {
-        if (IsOwner) return;
+        if (IsOwner)
+        {
+            return;
+        }
 
-        Logger.Instance.LogInfo($"Client got punch {takeAwayPoint}");
+        Logger.Instance.LogInfo($"Putazo recibido: {takeAwayPoint}");
     }
 
     [ServerRpc]

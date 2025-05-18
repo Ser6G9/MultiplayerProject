@@ -37,7 +37,6 @@ public class PlayerControl : NetworkBehaviour
     
     private CharacterController characterController;
     
-    // client caches positions
     private Vector3 oldInputPosition = Vector3.zero;
     private Vector3 oldInputRotation = Vector3.zero;
     private PlayerState oldPlayerState = PlayerState.Idle;

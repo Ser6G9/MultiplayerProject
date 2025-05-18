@@ -24,8 +24,7 @@ public class PlayerControlAuthorative : NetworkBehaviour
     private CharacterController characterController;
 
     private Animator animator;
-
-    // client caches animation states
+    
     private PlayerState oldPlayerState = PlayerState.Idle;
 
     private void Awake()

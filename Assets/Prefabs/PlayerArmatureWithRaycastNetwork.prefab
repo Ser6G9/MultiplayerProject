@@ -674,9 +674,9 @@ GameObject:
   - component: {fileID: -8313326421856323857}
   - component: {fileID: -5666390349975947983}
   - component: {fileID: 3744294913487860803}
-  - component: {fileID: 6174784278528370158}
-  m_Layer: 8
-  m_Name: PlayerArmatureNetwork
+  - component: {fileID: 8969716441905935079}
+  m_Layer: 6
+  m_Name: PlayerArmatureWithRaycastNetwork
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ Animator:
   m_GameObject: {fileID: 2255991852033553856}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: eec69ad5ebd7849418020db04e5ed28f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d0272bffc105daf468bd25eeab2411f1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e63639699374a347a4ed4653143d74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6174784278528370158
+--- !u!114 &8969716441905935079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -816,19 +816,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2255991852033553856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932d691fb08fd6e46bfb8464e00e2757, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c8a5ff3f9a4e13418df908f76d74733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 3.5
-  runSpeedOffset: 4
+  runSpeedOffset: 2
   rotationSpeed: 0.8
-  defaultInitialPlanePosition: {x: -4, y: 4}
+  defaultInitialPositionOnPlane: {x: -4, y: 4}
   networkPositionDirection:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotationDirection:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkPlayerState:
     m_InternalValue: 0
+  networkPlayerHealth:
+    m_InternalValue: 1000
+  networkPlayerPunchBlend:
+    m_InternalValue: 0
+  leftHand: {fileID: 6867047020064102711}
+  rightHand: {fileID: 7564247617468009595}
+  minPunchDistance: 0.5
 --- !u!1 &2439462815760529262
 GameObject:
   m_ObjectHideFlags: 0

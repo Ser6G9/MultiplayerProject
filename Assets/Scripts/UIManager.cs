@@ -22,10 +22,7 @@ public class UIManager : Singleton<UIManager>
     private Button executePhysicsButton;
     
     private bool hasServerStarted;
-/*
-    [SerializeField]
-    private TMP_InputField joinCodeInput;
-*/
+    
     private void Awake()
     {
         Cursor.visible = true;
@@ -41,8 +38,10 @@ public class UIManager : Singleton<UIManager>
         // START HOST
         startHostButton?.onClick.AddListener(async () =>
         {
-            /*if (RelayManager.Instance.IsRelayEnabled) 
-                await RelayManager.Instance.SetupRelay();*/
+            /*if (RelayManager.Instance.IsRelayEnabled)
+            {
+                await RelayManager.Instance.SetupRelay();
+            }*/
 
             if (NetworkManager.Singleton.StartHost())
             {
@@ -71,7 +70,9 @@ public class UIManager : Singleton<UIManager>
         startClientButton?.onClick.AddListener(async () =>
         {
             /*if (RelayManager.Instance.IsRelayEnabled && !string.IsNullOrEmpty(joinCodeInput.text))
-                await RelayManager.Instance.JoinRelay(joinCodeInput.text);*/
+            {
+                await RelayManager.Instance.JoinRelay(joinCodeInput.text);
+            }*/
 
             if (NetworkManager.Singleton.StartClient())
             {
@@ -82,13 +83,7 @@ public class UIManager : Singleton<UIManager>
                 Logger.Instance.LogInfo("Unable to start client...");
             }
         });
-/*
-        // STATUS TYPE CALLBACKS
-        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
-        {
-            Logger.Instance.LogInfo($"{id} just connected...");
-        };
-*/
+        
         NetworkManager.Singleton.OnServerStarted += () =>
         {
             hasServerStarted = true;
